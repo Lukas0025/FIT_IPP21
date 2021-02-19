@@ -21,11 +21,6 @@
             //get type
             $this->type = $this->get_type($word);
 
-            if ($this->type === null) {
-                echo "bad type ". $word;
-                exit(1);
-            }
-
             $this->data = $word;
 
             //todo: check type
@@ -50,8 +45,6 @@
             } else {
                 return "label";
             }
-
-            return null;
         }
     }
 
@@ -82,6 +75,11 @@
 
             $this->instruction = $parsed_line[0];
             $this->op                = $this->language["instructions"][$this->instruction]['op'];
+
+            if ((count($parsed_line) - 1) <> $this->language["instructions"][$this->instruction]['args_count']) {
+                echo "bad args count " . $parsed_line[0];
+                exit(1);
+            }
             
             $this->args            = [];
             for($i = 1; $i < count($parsed_line); $i++) {
