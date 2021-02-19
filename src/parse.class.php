@@ -166,7 +166,7 @@
             while ( $line = fgets($this->stream ) ) {
                 //hlavička
                 if ($line_num == 0) {
-                    if (preg_replace('/\s+/', '', $line) <> ".IPPcode21") {
+                    if (strtoupper(preg_replace('/\s+/', '', $line) ) <> ".IPPCODE21") {
                         echo "bad header ". $line;
                         exit(1);
                     }
