@@ -123,6 +123,8 @@
         }
 
         private function line_parse($line) {
+            $line .= " "; // přidání mezery na konec pro spráné parsování bez ní může být vynecháno podledn slovo
+
             $words = [];
             $cur_word = "";
 
@@ -135,7 +137,7 @@
                         $cur_word = "";
                     }
                 } else {
-                    //check is it start of comment
+                    //je to komentář
                     if ($char == "#") {
                         if ($cur_word <> "") {
                             array_push($words, $cur_word);
