@@ -1,0 +1,7 @@
+.IPPcode21
+WRITE string@<
+WRITE string@>
+WRITE string@&
+WRITE string@"
+WRITE string@'
+WRITE string@&lt;
