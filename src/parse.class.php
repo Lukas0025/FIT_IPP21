@@ -73,7 +73,7 @@
                 exit(1);
             }
 
-            $this->instruction = $parsed_line[0];
+            $this->instruction = strtoupper($parsed_line[0]);
             $this->op                = $this->language["instructions"][$this->instruction]['op'];
 
             if ((count($parsed_line) - 1) <> $this->language["instructions"][$this->instruction]['args_count']) {
