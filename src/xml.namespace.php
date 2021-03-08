@@ -17,7 +17,7 @@
             $instruction_obj->addAttribute("opcode", $instruction->op);
 
             foreach ($instruction->args as $key => $arg) {
-                $arg_ob = $instruction_obj->addChild('arg' . ($key + 1), $arg->data);
+                $arg_ob = $instruction_obj->addChild('arg' . ($key + 1), $arg->raw);
                 $arg_ob->addAttribute("type", $arg->type);
             }
 

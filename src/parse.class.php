@@ -1,5 +1,42 @@
 <?php
 
+    class appError {
+        public static function param($msg) {
+            fwrite(STDERR, $msg . PHP_EOL);
+            exit (10);
+        }
+
+        public static function inputFile($msg) {
+            fwrite(STDERR, $msg . PHP_EOL);
+            exit (11);
+        }
+
+        public static function outputFile($msg) {
+            fwrite(STDERR, $msg . PHP_EOL);
+            exit (12);
+        }
+
+        public static function header($msg) {
+            fwrite(STDERR, $msg . PHP_EOL);
+            exit (21);
+        }
+
+        public static function operation($msg) {
+            fwrite(STDERR, $msg . PHP_EOL);
+            exit (22);
+        }
+
+        public static function lexOrSyntax($msg) {
+            fwrite(STDERR, $msg . PHP_EOL);
+            exit (23);
+        }
+
+        public static function general($msg) {
+            fwrite(STDERR, $msg . PHP_EOL);
+            exit (99);
+        }
+    }
+
     /**
      * Třída popisující argument instrukce
      */
@@ -16,34 +53,50 @@
          *      - vytvoří $this->data s daty argumentu
          */
         function __construct($word, $instruction, $index, $language) {
-            $meta  = $language["instructions"][$instruction];
-
-            //get type
-            $this->type = $this->get_type($word);
-
-            $this->data = $word;
-
-            //todo: check type
+            $this->parse($word);
         }
 
         /**
-         * Vrátí typ slova
+         * Vrátí typ slova a hodnotu
          * @param str $word
-         * @return str $type (var, str, int, float, bool, label)
+         * @return null
+         * @post set $this->type (var, str, int, float, bool, label)
+         * set $this->value
          */
-        private function get_type($word) {
+        private function parse($word) {
             if (str_starts_with($word, "GF@") || str_starts_with($word, "LF@") || str_starts_with($word, "TF@")) {
-                return "var";
+                $this->type = "var";
+                $this->value = substr($word, 3);
             } else if (str_starts_with($word, "string@")) {
-                return "str";
+                $this->type = "str";
+                $this->value = substr($word, 7);
             } else if (str_starts_with($word, "int@")) {
-                return "int";
-            } else if (str_starts_with($word, "float@")) {
-                return "float";
+                $this->type = "int";
+                $this->value = substr($word, 4);
+            } else if (str_starts_with($word, "nil@")) {
+                $this->type = "nil";
+                $this->value = substr($word, 4);
             } else if (str_starts_with($word, "bool@")) {
-                return "bool";
+                $this->type  = "bool";
+                $this->value = substr($word, 5);
             } else {
-                return "label";
+                $this->type   = "label";
+                $this->value = $word;
+            }
+
+            $this->valueCheck($this->type, $this->value);
+
+            $this->raw = $word;
+        }
+
+        private function valueCheck($type, $value) {
+            switch ($type) {
+                case "bool":
+                    if ($value != "true" && $value != "false") {
+                        appError::lexOrSyntax("neznámá hodnota pro typ bool " . $value);
+                    }
+                    break;
+
             }
         }
     }
@@ -69,16 +122,14 @@
             $this->language = $language;
             
             if (!$this->haveOP($parsed_line[0])) {
-                echo "no op " . $parsed_line[0];
-                exit(1);
+                appError::operation("neznámá instrukce " . $parsed_line[0]);
             }
 
             $this->instruction = strtoupper($parsed_line[0]);
             $this->op                = $this->language["instructions"][$this->instruction]['op'];
 
             if ((count($parsed_line) - 1) <> $this->language["instructions"][$this->instruction]['args_count']) {
-                echo "bad args count " . $parsed_line[0];
-                exit(1);
+                appError::param("špatný počet argumentů pro instrukci " . $parsed_line[0]);
             }
             
             $this->args            = [];
@@ -166,12 +217,14 @@
             while ( $line = fgets($this->stream ) ) {
                 //hlavička
                 if ($line_num == 0) {
-                    if (strtoupper(preg_replace('/\s+/', '', $line) ) <> ".IPPCODE21") {
-                        echo "bad header ". $line;
-                        exit(1);
+                    if (preg_replace('/(\s)*\.IPPCODE21(\s)*/', '', strtoupper($line))  <> "") {
+                        if ($line[0] != "#") {
+                            appError::header("špatná hlavička " . $line);
+                        }
+                    } else {
+                        $line_num++;
                     }
 
-                    $line_num++;
                     continue;
                 }
 

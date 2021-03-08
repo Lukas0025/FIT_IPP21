@@ -1,193 +1,69 @@
 <?php
     $IPP21_LANG = [
-        "types" => [
-            "str",
-            "int",
-            "float",
-            "bool",
-            "var",
-            "type"
-        ],
-
         "instructions" => [
             "ADD" => [
                 "op"  => "add",
                 "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["int", "float"]],
-                    2 => ["type" => ["int", "float"]]
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => [1,2] //slected by input
-                ]
             ],
 
             "SUB" => [
                 "args_count" => 3,
-                "op"  => "sub",
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["int", "float"]],
-                    2 => ["type" => ["int", "float"]]
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => [1,2] //slected by input
-                ]
+                "op"  => "sub"
             ],
 
             "MUL" => [
                 "op"  => "mul",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["int", "float"]],
-                    2 => ["type" => ["int", "float"]]
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => [1,2] //slected by input
-                ]
+                "args_count" => 3
             ],
 
             "IDIV" => [
                 "op"  => "idiv",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["int"]],
-                    2 => ["type" => ["int"]]
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => "int"
-                ]
+                "args_count" => 3
             ],
 
             "DIV" => [
                 "op"  => "div",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["int", "float"]],
-                    2 => ["type" => ["int", "float"]]
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => "float"
-                ]
+                "args_count" => 3
             ],
 
             "LT" => [
                 "op"  => "lt",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["int", "bool", "str", "float"]],
-                    2 => ["type" => ["int", "bool", "str", "float"]]
-                ],
-                "same"   => [[1,2]],
-                "write" => [
-                    0 => "bool"
-                ]
+                "args_count" => 3
             ],
 
             "GT" => [
                 "op"  => "gt",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["int", "bool", "str", "float"]],
-                    2 => ["type" => ["int", "bool", "str", "float"]]
-                ],
-                "same"   => [[1,2]],
-                "write" => [
-                    0 => "bool"
-                ]
+                "args_count" => 3
             ],
 
             "EQ" => [
                 "op"  => "eq",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["int", "bool", "str", "float"]],
-                    2 => ["type" => ["int", "bool", "str", "float"]]
-                ],
-                "same"   => [[1,2]],
-                "write" => [
-                    0 => "bool"
-                ]
+                "args_count" => 3
             ],
 
             "\AND" => [
                 "op"  => "and",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["bool"]],
-                    2 => ["type" => ["bool"]]
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => "bool"
-                ]
+                "args_count" => 3
             ],
 
             "OR" => [
                 "op"  => "or",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["bool"]],
-                    2 => ["type" => ["bool"]]
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => "bool"
-                ]
+                "args_count" => 3
             ],
 
             "NOT" => [
                 "op"  => "not",
-                "args_count" => 2,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["bool"]]
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => "bool"
-                ]
+                "args_count" => 2
             ],
 
             "INT2CHAR" => [
                 "op"  => "int2char",
-                "args_count" => 2,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["int"]]
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => "int"
-                ]
+                "args_count" => 2
             ],
 
             "STRI2INT" => [
                 "op"  => "stri2int",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["str"]],
-                    2 => ["type" => ["int"]]
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => "int"
-                ]
+                "args_count" => 3
             ],
 
             /**
@@ -196,25 +72,12 @@
 
             "READ" => [
                 "op"  => "read",
-                "args_count" => 2,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["type"]]
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => "1" // " means from data type in arg 1
-                ]
+                "args_count" => 2
             ],
 
             "WRITE" => [
                 "op"  => "write",
-                "args_count" => 1,
-                "args" => [
-                    0 => ["type" => ["var", "int", "str", "bool", "float"]]
-                ],
-                "same"   => [],
-                "write" => []
+                "args_count" => 1
             ],
 
             /**
@@ -223,57 +86,22 @@
 
             "CONCAT" => [
                 "op"  => "concat",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["str"]],
-                    2 => ["type" => ["str"]]
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => "str"
-                ]
+                "args_count" => 3
             ],
 
             "STRLEN" => [
                 "op"  => "strlen",
-                "args_count" => 2,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["str"]]
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => "int"
-                ]
+                "args_count" => 2
             ],
 
             "GETCHAR" => [
                 "op"  => "getchar",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["str"]],
-                    2 => ["type" => ["int"]],
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => "str"
-                ]
+                "args_count" => 3
             ],
 
             "SETCHAR" => [
                 "op"  => "setchar",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["int"]],
-                    2 => ["type" => ["str"]],
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => "str"
-                ]
+                "args_count" => 3
             ],
 
             /**
@@ -282,15 +110,7 @@
 
             "TYPE " => [
                 "op"  => "type",
-                "args_count" => 2,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["int", "bool", "str", "float"]],
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => "str"
-                ]
+                "args_count" => 2
             ],
 
             /**
@@ -299,79 +119,27 @@
 
             "LABEL" => [
                 "op"  => "label",
-                "args_count" => 1,
-                "args" => [
-                    0 => ["type" => ["label"]],
-                ],
-                "same"   => [],
-                "write" => []
+                "args_count" => 1
             ],
 
             "JUMP" => [
                 "op"  => "jump",
-                "args_count" => 1,
-                "args" => [
-                    0 => ["type" => ["label"]],
-                ],
-                "same"   => [],
-                "write" => []
-            ],
-
-            "MOVE" => [
-                "op"  => "move",
-                "args_count" => 2,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                    1 => ["type" => ["var", "int", "str", "bool", "float"]],
-                ],
-                "same"   => [],
-                "write" => [
-                    0 => 1
-                ]
-            ],
-
-            "DEFVAR" => [
-                "op"  => "defvar",
-                "args_count" => 1,
-                "args" => [
-                    0 => ["type" => ["var"]],
-                ],
-                "same"   => [],
-                "write" => []
+                "args_count" => 1
             ],
 
             "JUMPIFNEQ" => [
                 "op"  => "jumpifneq",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["label"]],
-                    1 => ["type" => ["var", "int", "bool", "str", "float"]],
-                    2 => ["type" => ["var", "int", "bool", "str", "float"]],
-                ],
-                "same"   => [[1,2]],
-                "write" => []
+                "args_count" => 3
             ],
 
             "JUMPIFEQ" => [
                 "op"  => "jumpifeq",
-                "args_count" => 3,
-                "args" => [
-                    0 => ["type" => ["label"]],
-                    1 => ["type" => ["var", "int", "bool", "str", "float"]],
-                    2 => ["type" => ["var", "int", "bool", "str", "float"]],
-                ],
-                "same"   => [[1,2]],
-                "write" => []
+                "args_count" => 3
             ],
 
             "EXIT" => [
                 "op"  => "exit",
-                "args_count" => 1,
-                "args" => [
-                    0 => ["type" => ["exit_code"]]
-                ],
-                "same"   => [],
-                "write" => []
+                "args_count" => 1
             ],
 
             /**
@@ -380,21 +148,52 @@
 
             "DPRINT" => [
                 "op"  => "dprint",
-                "args_count" => 1,
-                "args" => [
-                    0 => ["type" => ["var", "int", "bool", "str", "float"]]
-                ],
-                "same"   => [],
-                "write" => []
+                "args_count" => 1
             ],
 
             "BREAK" => [
                 "op"  => "break",
-                "args_count" => 0,
-                "args" => [],
-                "same"   => [],
-                "write" => []
+                "args_count" => 0
             ],
+
+            /**
+             * functions
+             */
+
+            "MOVE" => [
+                "op"  => "move",
+                "args_count" => 2
+            ],
+
+            "CREATEFRAME" => [
+                "op"  => "defvar",
+                "args_count" => 0
+            ],
+
+            "PUSHFRAME" => [
+                "op"  => "defvar",
+                "args_count" => 0
+            ],
+
+            "POPFRAME" => [
+                "op"  => "defvar",
+                "args_count" => 0
+            ],
+
+            "DEFVAR" => [
+                "op"  => "defvar",
+                "args_count" => 1
+            ],
+
+            "CALL" => [
+                "op"  => "defvar",
+                "args_count" => 1
+            ],
+
+            "RETURN" => [
+                "op"  => "defvar",
+                "args_count" => 0
+            ]
             
         ]
     ];
