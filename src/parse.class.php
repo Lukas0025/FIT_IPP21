@@ -154,7 +154,7 @@
             $this->op                = $this->language["instructions"][$this->instruction]['op'];
 
             if ((count($parsed_line) - 1) <> $this->language["instructions"][$this->instruction]['args_count']) {
-                appError::param("špatný počet argumentů pro instrukci " . $parsed_line[0]);
+                appError::lexOrSyntax("špatný počet argumentů pro instrukci " . $parsed_line[0]);
             }
             
             $this->args            = [];

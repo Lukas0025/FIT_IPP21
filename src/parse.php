@@ -6,16 +6,15 @@
     if (count($argv) == 2) {
 
         if ($argv[1] == "--help")  {
-            echo "IPP CODE 21 PARSER\n";
-            echo "\n";
-            echo "connect source to stdin and on stdout is XML output\n";
+            echo "Skript typu filtr načte ze standardního vstupu zdrojový kód v IPPcode21,\n"
+                       . "zkontroluje lexikální a syntaktickou správnost kódu a vypíše na standardní výstup XML reprezentaci programu\n";
             exit(0);
         }
 
-        exit(10);
+        appError::param("nesprávné argumenty. --help pro pomoc");
 
     } else if (count($argv) > 2) {
-        exit(10);
+        appError::param("nesprávné argumenty. --help pro pomoc");
     }
 
     $parser = new parse('php://stdin', $IPP21_LANG);
