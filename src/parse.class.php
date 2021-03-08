@@ -110,7 +110,7 @@
                     break;
 
                 case "int":
-                    if (!is_int($value)) {
+                    if (intval($value) <> $value) {
                         appError::lexOrSyntax("neplatné číslo typu int " . $value);
                     }
 
@@ -123,7 +123,6 @@
 
         private function isValidLable($value) {
             return preg_replace("/[a-zA-Z0-9_\-$&%*!?]/", '', $value)  == "";
-            return true;
         }
     }
 

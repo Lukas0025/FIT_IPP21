@@ -1,0 +1,11 @@
+#ifj kod
+#test integeru
+.IPPcode21
+
+DEFVAR GF@counter
+MOVE GF@counter int@10
+MOVE GF@counter int@-10
+MOVE GF@counter int@ahj
+
+MOVE GF@counter int@10.1
+MOVE GF@counter int@10.0
