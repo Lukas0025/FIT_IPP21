@@ -53,17 +53,6 @@
          *      - vytvoří $this->data s daty argumentu
          */
         function __construct($word, $instruction, $index, $language) {
-            $this->parse($word);
-        }
-
-        /**
-         * Vrátí typ slova a hodnotu
-         * @param str $word
-         * @return null
-         * @post set $this->type (var, str, int, float, bool, label)
-         * set $this->value
-         */
-        private function parse($word) {
             if (str_starts_with($word, "GF@") || str_starts_with($word, "LF@") || str_starts_with($word, "TF@")) {
                 $this->type = "var";
                 $this->value = substr($word, 3);
@@ -79,6 +68,9 @@
             } else if (str_starts_with($word, "bool@")) {
                 $this->type  = "bool";
                 $this->value = substr($word, 5);
+            } else if ($instruction == "READ" && $index == 2) {
+                $this->type   = "type";
+                $this->value = $word;
             } else {
                 $this->type   = "label";
                 $this->value = $word;
@@ -109,13 +101,14 @@
                     }
                     break;
 
-                case "int":
-                    if (intval($value) <> $value) {
-                        appError::lexOrSyntax("neplatné číslo typu int " . $value);
+                case "type":
+                    if (!$this->isType($value)) {
+                        appError::lexOrSyntax("neplatný typ " . $value);
                     }
+                    break;
 
-                /*case "str":
-                    if (!is_int($value)) {
+                /*case "int":
+                    if (intval($value) <> $value) {
                         appError::lexOrSyntax("neplatné číslo typu int " . $value);
                     }*/
             }
@@ -123,6 +116,12 @@
 
         private function isValidLable($value) {
             return preg_replace("/[a-zA-Z0-9_\-$&%*!?]/", '', $value)  == "";
+        }
+
+        private function isType($value) {
+            $types = ["int", "string", "bool"];
+
+            return in_array($value, $types);
         }
     }
 

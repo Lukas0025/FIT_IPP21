@@ -1,0 +1,6 @@
+.IPPcode21
+DEFVAR GF@counter
+READ counter string
+READ counter int
+READ counter bool
+READ counter float
