@@ -97,7 +97,33 @@
                     }
                     break;
 
+                case "var":
+                    if (!$this->isValidLable($value)) {
+                        appError::lexOrSyntax("neplatný identifikátor proměnné " . $value);
+                    }
+                    break;
+
+                case "lable":
+                    if (!$this->isValidLable($value)) {
+                        appError::lexOrSyntax("neplatné návještí " . $value);
+                    }
+                    break;
+
+                case "int":
+                    if (!is_int($value)) {
+                        appError::lexOrSyntax("neplatné číslo typu int " . $value);
+                    }
+
+                /*case "str":
+                    if (!is_int($value)) {
+                        appError::lexOrSyntax("neplatné číslo typu int " . $value);
+                    }*/
             }
+        }
+
+        private function isValidLable($value) {
+            return preg_replace("/[a-zA-Z0-9_\-$&%*!?]/", '', $value)  == "";
+            return true;
         }
     }
 
