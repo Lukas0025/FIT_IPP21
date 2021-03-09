@@ -1,7 +1,14 @@
 <?php
+/**
+ * Hlavní soubor scriptu slouží jako spustitelný soubor
+ * @autor Lukáš Plevač <xpleva07@vutbr.cz>
+ * @date 9.3.2020
+ */
     include "parse.class.php";
     include "xml.namespace.php";
     include "IPP21.spec.php";
+    //if run under php 7.4 else comment it
+    include "php8.support.php";
 
     if (count($argv) == 2) {
 

@@ -1,5 +1,29 @@
 <?php
     $IPP21_LANG = [
+        "needVar1ST" => [
+            "ADD",
+            "SUB",
+            "MUL",
+            "IDIV",
+            "LT",
+            "GT",
+            "EQ",
+            "AND",
+            "OR",
+            "NOT",
+            "INT2CHAR",
+            "STRI2INT",
+            "READ",
+            "CONCAT",
+            "STRLEN",
+            "GETCHAR",
+            "SETCHAR",
+            "TYPE",
+            "POPS",
+            "DEFVAR",
+            "MOVE"
+        ],
+        
         "instructions" => [
             "ADD" => [
                 "op"  => "add",

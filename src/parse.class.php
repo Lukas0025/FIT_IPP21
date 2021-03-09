@@ -1,5 +1,13 @@
 <?php
+/**
+ * Soubor s kódem tříd parseru
+ * @autor Lukáš Plevač <xpleva07@vutbr.cz>
+ * @date 9.3.2020
+ */
 
+    /**
+     * Třída popisující chybové výstupy
+     */
     class appError {
         public static function param($msg) {
             fwrite(STDERR, $msg . PHP_EOL);
@@ -41,46 +49,22 @@
      * Třída popisující argument instrukce
      */
     class argument {
-
-        private $var_inst = [
-            "ADD",
-            "SUB",
-            "MUL",
-            "IDIV",
-            "LT",
-            "GT",
-            "EQ",
-            "AND",
-            "OR",
-            "NOT",
-            "INT2CHAR",
-            "STRI2INT",
-            "READ",
-            "CONCAT",
-            "STRLEN",
-            "GETCHAR",
-            "SETCHAR",
-            "TYPE",
-            "POPS",
-            "DEFVAR",
-            "MOVE"
-        ];
-
         /**
-         * argument constructor - načte arument ze slova
+         * argument constructor - načte arument ze slova a zkotroluje správnost hodnoty
          * @param str $word - náš argument
          * @param str $instruction - jméno instrukce pro kterou argument je
          * @param int $index - index argumentu (pozice argumentu)
          * @param array $language - struktuta popisujíí jazyk
          * @post 
          *      - vytvoří $this->type s dat typem argumentu
-         *      - vytvoří $this->data s daty argumentu
+         *      - vytvoří $this->value s hodnotou argumentu
+         *      - vytvoří $this->raw s stringem argumentu ze vstupu
          */
         function __construct($word, $instruction, $index, $language) {
             if (str_starts_with($word, "GF@") || str_starts_with($word, "LF@") || str_starts_with($word, "TF@")) {
                 $this->type = "var";
                 $this->value = substr($word, 3);
-            } else if (in_array($instruction, $this->var_inst) && $index == 1) {
+            } else if (in_array($instruction, $language["needVar1ST"]) && $index == 1) {
                 appError::lexOrSyntax("neplatný identifikátor proměnné " . $word);
             } else if ($instruction == "CALL" || $instruction == "LABEL" || $instruction == "JUMP" || (($instruction == "JUMPIFEQ" || $instruction == "JUMPIFNEQ") && $index == 1)) {
                 $this->type   = "label";
@@ -109,6 +93,12 @@
             $this->raw = $word;
         }
 
+        /**
+         * Ověří zda hodnota argumentu je validní
+         * @param $type - str type z $this->type
+         * @param $value - str hodnota pro ověření
+         * @return bool
+         */
         private function valueCheck($type, $value) {
             switch ($type) {
                 case "bool":
@@ -141,17 +131,27 @@
                     }
                     break;
 
-                /*case "int":
+                /*case "string":
                     if (intval($value) <> $value) {
                         appError::lexOrSyntax("neplatné číslo typu int " . $value);
                     }*/
             }
         }
 
+        /**
+         * Zjistí zda se jedná o validní label neb jméno proměnné
+         * @param $value - danný identifikátor
+         * @return bool
+         */
         private function isValidLable($value) {
             return (strlen($value) > 0) && (preg_replace("/[a-zA-Z0-9_\-$&%*!?]/", '', $value)  == "") && (preg_replace("/[a-zA-Z_\-$&%*!?]/", '', $value[0]) == "");
         }
 
+        /**
+         * Zjistí zda se jedná o validní datový typ
+         * @param $value - datový typ
+         * @return bool
+         */
         private function isType($value) {
             $types = ["int", "string", "bool"];
 

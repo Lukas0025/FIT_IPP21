@@ -1,6 +1,5 @@
-# Dokumentace  k 1. úloze do předmětu IPP 2020/2021
-
-Jméno a Příjmení: Lukáš Plevač
+Implementační dokumentace k 1. úloze do IPP 2020/2021
+Jméno a příjmení: Lukáš Plevač
 Login: xpleva07
 
 ## Popis
