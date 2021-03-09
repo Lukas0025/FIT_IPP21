@@ -1,4 +1,5 @@
 # test obsahující všechny příkazy
+
 .IPPcode21
 
 MOVE GF@tmp int@10
@@ -53,3 +54,11 @@ DEFVAR LF@a
 DEFVAR TF@a
 
 MOVE GF@a GF@a
+
+READ GF@aa string
+
+SETCHAR GF@a int@a int@a
+
+TYPE GF@a int@10
+
+RETURN

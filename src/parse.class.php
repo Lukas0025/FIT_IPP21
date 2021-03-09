@@ -42,6 +42,30 @@
      */
     class argument {
 
+        private $var_inst = [
+            "ADD",
+            "SUB",
+            "MUL",
+            "IDIV",
+            "LT",
+            "GT",
+            "EQ",
+            "AND",
+            "OR",
+            "NOT",
+            "INT2CHAR",
+            "STRI2INT",
+            "READ",
+            "CONCAT",
+            "STRLEN",
+            "GETCHAR",
+            "SETCHAR",
+            "TYPE",
+            "POPS",
+            "DEFVAR",
+            "MOVE"
+        ];
+
         /**
          * argument constructor - načte arument ze slova
          * @param str $word - náš argument
@@ -56,7 +80,7 @@
             if (str_starts_with($word, "GF@") || str_starts_with($word, "LF@") || str_starts_with($word, "TF@")) {
                 $this->type = "var";
                 $this->value = substr($word, 3);
-            } else if ($instruction == "DEFVAR") {
+            } else if (in_array($instruction, $this->var_inst) && $index == 1) {
                 appError::lexOrSyntax("neplatný identifikátor proměnné " . $word);
             } else if ($instruction == "CALL" || $instruction == "LABEL" || $instruction == "JUMP" || (($instruction == "JUMPIFEQ" || $instruction == "JUMPIFNEQ") && $index == 1)) {
                 $this->type   = "label";
@@ -125,7 +149,7 @@
         }
 
         private function isValidLable($value) {
-            return preg_replace("/[a-zA-Z0-9_\-$&%*!?]/", '', $value)  == "";
+            return (strlen($value) > 0) && (preg_replace("/[a-zA-Z0-9_\-$&%*!?]/", '', $value)  == "") && (preg_replace("/[a-zA-Z_\-$&%*!?]/", '', $value[0]) == "");
         }
 
         private function isType($value) {
@@ -253,7 +277,7 @@
                 //hlavička
                 if ($line_num == 0) {
                     if (preg_replace('/(\s)*\.IPPCODE21(\s)*/', '', strtoupper($line))  <> "") {
-                        if ($line[0] != "#" && count(str_split($line)) > 0) {
+                        if ($line[0] != "#" && strlen(trim($line)) > 0) {
                             appError::header("špatná hlavička " . $line);
                         }
 
