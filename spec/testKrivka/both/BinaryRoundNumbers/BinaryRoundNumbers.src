@@ -1,0 +1,11 @@
+.IPPcode21
+DEFVAR GF@variable
+DEFVAR GF@counter
+MOVE GF@counter int@10
+MOVE GF@variable int@1
+LABEL mainLoop
+WRITE GF@variable
+WRITE string@\010
+MUL GF@variable GF@variable int@2
+SUB GF@counter GF@counter int@1
+JUMPIFNEQ mainLoop GF@counter int@0

@@ -13,8 +13,8 @@
         foreach ($instructions as $index => $instruction) {
             $instruction_obj = $xml->addChild('instruction');
 
-            $instruction_obj->addAttribute("order", $index);
-            $instruction_obj->addAttribute("opcode", $instruction->op);
+            $instruction_obj->addAttribute("order", $index + 1);
+            $instruction_obj->addAttribute("opcode", strtoupper($instruction->op));
 
             foreach ($instruction->args as $key => $arg) {
                 if ($arg->type == "var") {

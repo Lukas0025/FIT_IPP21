@@ -86,7 +86,7 @@
                 $this->type   = "label";
                 $this->value = $word;
             } else if (str_starts_with($word, "string@")) {
-                $this->type = "str";
+                $this->type = "string";
                 $this->value = substr($word, 7);
             } else if (str_starts_with($word, "int@")) {
                 $this->type = "int";
@@ -274,22 +274,24 @@
             $have_header = false;
 
             while ( $line = fgets($this->stream ) ) {
+                
+                $parsed_line = $this->line_parse($line);
+
                 //hlavička
                 if ($line_num == 0) {
-                    if (preg_replace('/(\s)*\.IPPCODE21(\s)*/', '', strtoupper($line))  <> "") {
-                        if ($line[0] != "#" && strlen(trim($line)) > 0) {
-                            appError::header("špatná hlavička " . $line);
+                    if ( count($parsed_line) > 0 ) {
+
+                        if (strtoupper($parsed_line[0]) <> ".IPPCODE21") {
+                            appError::header("špatná hlavička " . $parsed_line[0]);
                         }
 
-                    } else {
                         $line_num++;
                         $have_header = true;
-                    }
+
+                    } 
 
                     continue;
                 }
-
-                $parsed_line = $this->line_parse($line);
 
                 if (count($parsed_line) > 0) {
                     array_push($commands, new instruction($parsed_line, $this->language));

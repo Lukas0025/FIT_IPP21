@@ -1,0 +1,19 @@
+.IPPcode21
+JUMP $$main
+
+LABEL $func
+POPFRAME
+WRITE TF@a
+RETURN
+
+LABEL $$main
+
+CREATEFRAME
+
+DEFVAR TF@a
+MOVE TF@a int@1
+
+PUSHFRAME
+CALL $func
+
+EXIT int@0

@@ -1,0 +1,16 @@
+.IPPcode21
+
+DEFVAR GF@input
+
+LABEL mainLoop
+JUMPIFEQ END GF@input int@0
+
+READ GF@input int
+
+WRITE GF@input
+WRITE string@\010
+
+JUMP mainLoop
+
+LABEL END
+EXIT int@0
