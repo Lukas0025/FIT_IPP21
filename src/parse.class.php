@@ -247,16 +247,19 @@
         public function parse() {
             $commands = [];
             $line_num     = 0;
+            $have_header = false;
 
             while ( $line = fgets($this->stream ) ) {
                 //hlavička
                 if ($line_num == 0) {
                     if (preg_replace('/(\s)*\.IPPCODE21(\s)*/', '', strtoupper($line))  <> "") {
-                        if ($line[0] != "#") {
+                        if ($line[0] != "#" && count(str_split($line)) > 0) {
                             appError::header("špatná hlavička " . $line);
                         }
+
                     } else {
                         $line_num++;
+                        $have_header = true;
                     }
 
                     continue;
@@ -269,6 +272,10 @@
                 }
 
                 $line_num++;
+            }
+
+            if (!$have_header) {
+                appError::header("bez hlavičky");
             }
 
             return $commands;

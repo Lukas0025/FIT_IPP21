@@ -41,7 +41,7 @@
                 "args_count" => 3
             ],
 
-            "\AND" => [
+            "AND" => [
                 "op"  => "and",
                 "args_count" => 3
             ],
@@ -154,6 +154,21 @@
             "BREAK" => [
                 "op"  => "break",
                 "args_count" => 0
+            ],
+
+            "PUSHS" => [
+                "op"  => "pushs",
+                "args_count" => 1
+            ],
+
+            "POPS" => [
+                "op"  => "pops",
+                "args_count" => 1
+            ],
+
+            "TYPE" => [
+                "op"  => "type",
+                "args_count" => 2
             ],
 
             /**

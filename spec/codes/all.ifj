@@ -1,0 +1,55 @@
+# test obsahující všechny příkazy
+.IPPcode21
+
+MOVE GF@tmp int@10
+CREATEFRAME
+PUSHFRAME
+POPFRAME
+DEFVAR GF@test
+CALL end
+RETURN
+
+PUSHS int@10
+POPS GF@test
+
+ADD GF@test int@10 int@10
+SUB GF@test int@10 int@10
+MUL GF@test int@10 int@10
+IDIV GF@test int@10 int@10
+
+LT GF@test int@10 int@10
+GT GF@test int@10 int@10
+EQ GF@test int@10 int@10
+
+AND GF@test bool@true bool@true
+OR GF@test bool@true bool@true
+NOT GF@test bool@true
+
+INT2CHAR GF@test int@10
+STRI2INT GF@test string@test int@1
+
+READ GF@test string
+WRITE GF@test
+
+CONCAT GF@test string@a string@b
+STRLEN GF@test string@ab
+
+GETCHAR GF@test int@10 string@ab
+SETCHAR GF@test string@a string@b
+
+TYPE GF@test int@10
+
+LABEL hello
+JUMP hello
+JUMPIFEQ hello GF@test GF@test
+JUMPIFNEQ hello GF@test GF@test
+EXIT int@10
+
+DPRINT int@10
+BREAK
+
+DEFVAR GF@a
+DEFVAR LF@a
+DEFVAR TF@a
+
+MOVE GF@a GF@a
