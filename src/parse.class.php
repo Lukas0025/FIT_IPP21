@@ -202,7 +202,7 @@
          * @return bool
          */
         private function haveOP($word) {
-            return array_key_exists($word, $this->language["instructions"]);
+            return array_key_exists(strtoupper($word), $this->language["instructions"]);
         }
 
     }

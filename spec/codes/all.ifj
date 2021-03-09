@@ -61,4 +61,13 @@ SETCHAR GF@a int@a int@a
 
 TYPE GF@a int@10
 
+LABEL aaa
+
+DPRINT GF@a
+
+dPRINT GF@a
+
+LABEL ADD
+
+
 RETURN
