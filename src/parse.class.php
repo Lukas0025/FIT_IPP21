@@ -131,10 +131,10 @@
                     }
                     break;
 
-                /*case "string":
-                    if (intval($value) <> $value) {
-                        appError::lexOrSyntax("neplatné číslo typu int " . $value);
-                    }*/
+                case "string":
+                    if ($this->isValidStr($value)) {
+                        appError::lexOrSyntax("neplatný string " . $value);
+                    }
             }
         }
 
@@ -156,6 +156,15 @@
             $types = ["int", "string", "bool"];
 
             return in_array($value, $types);
+        }
+
+        /**
+         * Zjistí zda se jedná o validní string
+         * @param $value - datový typ
+         * @return bool
+         */
+        private function isValidStr($value) {
+            return strpos(preg_replace("/\\\d\d\d/", '', $value) , "\\") === false;
         }
     }
 
