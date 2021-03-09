@@ -1,0 +1,7 @@
+# test testuje špatné espape segvence
+
+.IPPcode21
+
+WRITE string@hello\010
+WRITE string@hello\01a # bad
+WRITE string@hello\hello # bad
