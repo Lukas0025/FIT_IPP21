@@ -10,6 +10,8 @@
     //if run under php 7.4 else comment it
     include "php8.support.php";
 
+    ini_set('display_errors', 'stderr');
+
     if (count($argv) == 2) {
 
         if ($argv[1] == "--help")  {
