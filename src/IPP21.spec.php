@@ -181,17 +181,17 @@
             ],
 
             "CREATEFRAME" => [
-                "op"  => "defvar",
+                "op"  => "CREATEFRAME",
                 "args_count" => 0
             ],
 
             "PUSHFRAME" => [
-                "op"  => "defvar",
+                "op"  => "PUSHFRAME",
                 "args_count" => 0
             ],
 
             "POPFRAME" => [
-                "op"  => "defvar",
+                "op"  => "POPFRAME",
                 "args_count" => 0
             ],
 
@@ -201,12 +201,12 @@
             ],
 
             "CALL" => [
-                "op"  => "defvar",
+                "op"  => "CALL",
                 "args_count" => 1
             ],
 
             "RETURN" => [
-                "op"  => "defvar",
+                "op"  => "RETURN",
                 "args_count" => 0
             ]
             
