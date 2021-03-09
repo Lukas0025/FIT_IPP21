@@ -56,6 +56,11 @@
             if (str_starts_with($word, "GF@") || str_starts_with($word, "LF@") || str_starts_with($word, "TF@")) {
                 $this->type = "var";
                 $this->value = substr($word, 3);
+            } else if ($instruction == "DEFVAR") {
+                appError::lexOrSyntax("neplatný identifikátor proměnné " . $word);
+            } else if ($instruction == "CALL" || $instruction == "LABEL" || $instruction == "JUMP" || (($instruction == "JUMPIFEQ" || $instruction == "JUMPIFNEQ") && $index == 1)) {
+                $this->type   = "label";
+                $this->value = $word;
             } else if (str_starts_with($word, "string@")) {
                 $this->type = "str";
                 $this->value = substr($word, 7);
@@ -72,8 +77,7 @@
                 $this->type   = "type";
                 $this->value = $word;
             } else {
-                $this->type   = "label";
-                $this->value = $word;
+                appError::lexOrSyntax("neznámý datový typ " . $word);
             }
 
             $this->valueCheck($this->type, $this->value);
@@ -95,7 +99,7 @@
                     }
                     break;
 
-                case "lable":
+                case "label":
                     if (!$this->isValidLable($value)) {
                         appError::lexOrSyntax("neplatné návještí " . $value);
                     }
@@ -104,6 +108,12 @@
                 case "type":
                     if (!$this->isType($value)) {
                         appError::lexOrSyntax("neplatný typ " . $value);
+                    }
+                    break;
+
+                case "nil":
+                    if ($value <> "nil") {
+                        appError::lexOrSyntax("očekávano nil@nil ale na vtsupu je " . $value);
                     }
                     break;
 
