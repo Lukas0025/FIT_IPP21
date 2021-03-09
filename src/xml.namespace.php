@@ -1,4 +1,9 @@
 <?php
+/**
+ * Soubor s kódem pro správu xml
+ * @autor Lukáš Plevač <xpleva07@vutbr.cz>
+ * @date 9.3.2020
+ */
 
     /**
      * Převede array instrukcí na odpovádající XML kód

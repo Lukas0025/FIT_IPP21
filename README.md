@@ -12,6 +12,7 @@ Script je určený pro překlad z jazyka IPPcode21 do XML reprezentace tohoto k�
 * parse.class.php - obsahuje třídy popisující funkci perseru
 * xml.namespace.php - obsahuje pomocné funkce pro generoání výstupního XML
 * parse.php - TOP soubor implementace spojuje výše uvedené soubory. slouží jako spustitelný soubor
+* php8.support.php - soubor doplňující chybějící funkce z PHP 8, aby bylo možné spustit pod PHP 7.4
 
 ## Třídy
 
