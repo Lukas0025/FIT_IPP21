@@ -132,7 +132,7 @@
                     break;
 
                 case "string":
-                    if ($this->isValidStr($value)) {
+                    if (!$this->isValidStr($value)) {
                         appError::lexOrSyntax("neplatný string " . $value);
                     }
             }
@@ -164,7 +164,7 @@
          * @return bool
          */
         private function isValidStr($value) {
-            return strpos(preg_replace("/\\\d\d\d/", '', $value) , "\\") === false;
+            return strpos(preg_replace("/\\\\\d\d\d/", '', $value) , "\\") === false;
         }
     }
 
