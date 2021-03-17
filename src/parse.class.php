@@ -61,14 +61,17 @@
          *      - vytvoří $this->raw s stringem argumentu ze vstupu
          */
         function __construct($word, $instruction, $index, $language) {
-            if (str_starts_with($word, "GF@") || str_starts_with($word, "LF@") || str_starts_with($word, "TF@")) {
+            if ($instruction == "CALL" || $instruction == "LABEL" || $instruction == "JUMP" || (($instruction == "JUMPIFEQ" || $instruction == "JUMPIFNEQ") && $index == 1)) {
+                $this->type   = "label";
+                $this->value = $word;
+            } else if ($instruction == "READ" && $index == 2) {
+                $this->type   = "type";
+                $this->value = $word;
+            } else if (str_starts_with($word, "GF@") || str_starts_with($word, "LF@") || str_starts_with($word, "TF@")) {
                 $this->type = "var";
                 $this->value = substr($word, 3);
             } else if (in_array($instruction, $language["needVar1ST"]) && $index == 1) {
                 appError::lexOrSyntax("neplatný identifikátor proměnné " . $word);
-            } else if ($instruction == "CALL" || $instruction == "LABEL" || $instruction == "JUMP" || (($instruction == "JUMPIFEQ" || $instruction == "JUMPIFNEQ") && $index == 1)) {
-                $this->type   = "label";
-                $this->value = $word;
             } else if (str_starts_with($word, "string@")) {
                 $this->type = "string";
                 $this->value = substr($word, 7);
@@ -81,9 +84,6 @@
             } else if (str_starts_with($word, "bool@")) {
                 $this->type  = "bool";
                 $this->value = substr($word, 5);
-            } else if ($instruction == "READ" && $index == 2) {
-                $this->type   = "type";
-                $this->value = $word;
             } else {
                 appError::lexOrSyntax("neznámý datový typ " . $word);
             }
