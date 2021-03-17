@@ -23,9 +23,9 @@
 
             foreach ($instruction->args as $key => $arg) {
                 if ($arg->type == "var") {
-                    $arg_ob = $instruction_obj->addChild('arg' . ($key + 1), $arg->raw);
+                    $arg_ob = $instruction_obj->addChild('arg' . ($key + 1), htmlspecialchars($arg->raw, ENT_XML1, 'UTF-8'));
                 } else {
-                    $arg_ob = $instruction_obj->addChild('arg' . ($key + 1), $arg->value);   
+                    $arg_ob = $instruction_obj->addChild('arg' . ($key + 1), htmlspecialchars($arg->value, ENT_XML1, 'UTF-8'));   
                 }
                 
                 $arg_ob->addAttribute("type", $arg->type);
